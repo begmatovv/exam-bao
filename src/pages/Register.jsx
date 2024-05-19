@@ -2,6 +2,7 @@ import { FormInput, SubmitBtn } from "../components";
 import { Link, Form, useActionData } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import { useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -14,7 +15,7 @@ export const action = async ({ request }) => {
 
 function Register() {
   const data = useActionData();
-  const { register } = useRegister();
+  const {registerWithGoogle, register } = useRegister();
   useEffect(() => {
     if (data) {
       register(data);
@@ -54,6 +55,13 @@ function Register() {
         <div className="mt-4">
           <SubmitBtn text="" />
         </div>
+        <button
+          onClick={registerWithGoogle}
+          className="btn btn-primary w-full  mb-5"
+        >
+          <FcGoogle className="text-3xl" />
+          <span className="text-2xl">Google</span>
+        </button>
 
         <p className="text-center">
           Not a member yet ?

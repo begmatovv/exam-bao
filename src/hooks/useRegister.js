@@ -1,4 +1,9 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
@@ -21,6 +26,18 @@ export function useRegister() {
         toast.error(errorMessage);
       });
   };
+  const registerWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
+        dispatch(login(user));
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+      });
+  };
 
-  return { register };
+  return { register, registerWithGoogle };
 }

@@ -2,6 +2,8 @@ import { Form, Link, useActionData } from "react-router-dom";
 import { FormInput, SubmitBtn } from "../components";
 import { useLogin } from "../hooks/useLogin";
 import { useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { useRegister } from "../hooks/useRegister";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -12,6 +14,7 @@ export const action = async ({ request }) => {
 function Login() {
   const data = useActionData();
   const { signin } = useLogin();
+  const { registerWithGoogle } = useRegister();
   useEffect(() => {
     if (data) {
       signin(data);
@@ -39,8 +42,12 @@ function Login() {
         <div className="mt-4">
           <SubmitBtn text="Login" />
         </div>
-        <button type="button" className="btn btn-secondary btn-block">
-          Guest User
+        <button
+          onClick={registerWithGoogle}
+          className="btn btn-primary w-full  mb-5"
+        >
+          <FcGoogle className="text-3xl" />
+          <span className="text-2xl">Google</span>
         </button>
         <p className="text-center">
           Not a member yet ?
