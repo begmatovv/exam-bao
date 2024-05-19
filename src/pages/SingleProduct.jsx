@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CartList } from "../components";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../features/cart/cartSlice";
+import { addItem } from "../features/cart/cartSlice";
 import toast from "react-hot-toast";
 const SingleProduct = () => {
   const { id } = useParams();
@@ -26,8 +26,8 @@ const SingleProduct = () => {
       name: product.name,
       image: product.image,
     };
-    dispatch(addItemToCart(cartProduct));
-    toast.success("item added to cart")
+    dispatch(addItem(cartProduct));
+    toast.success("item added to cart");
   };
   useEffect(() => {
     fetch(`http://localhost:3000/products/${id}`)
@@ -52,7 +52,7 @@ const SingleProduct = () => {
         className="flex justify-between  gap-32 items-center"
       >
         <img
-          src={product.image.desktop}
+          src={`${product.image.desktop}`}
           alt=""
           className="lg:w-[540px]  lg:[h-560px] sm:h-[327px] md:h-[480px] md:w-[281px] sm:w-[327px]"
         />
@@ -115,7 +115,7 @@ const SingleProduct = () => {
         </div>
       </div>
       <div className="grid grid-cols-2 mb-40">
-        <div>
+        <div className="flex flex-col gap-5">
           <img
             className="w-[445px] h-[280px]"
             src={product.gallery.first.desktop}

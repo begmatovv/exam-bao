@@ -21,8 +21,10 @@ const Speakers = () => {
   }, []);
 
   return (
-    <div className="align-element">
-      
+    <div className="">
+      <h1 className="text-white bg-black/90 py-24 text-4xl uppercase flex justify-center mx-auto">
+        SPEAKERS
+      </h1>
       <div className="flex-col static align-element flex lg:justify-start justify-center items-center  ">
         {products &&
           products.map((item) => {

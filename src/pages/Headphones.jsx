@@ -3,7 +3,7 @@ import { Cart, CartList, PreFooter } from "../components";
 import BtnRev from "../components/BtnRev";
 const Headphones = () => {
   const [products, setProducts] = useState(null);
-  console.log(products);
+  
   useEffect(() => {
     fetch("http://localhost:3000/products")
       .then((data) => {
@@ -19,8 +19,9 @@ const Headphones = () => {
   }, []);
 
   return (
-    <div className="align-element">
-      <div className="flex-col static align-element flex lg:justify-start justify-center items-center  ">
+    <div className="">
+      <h1 className="text-white bg-black/90 py-24 text-4xl uppercase flex justify-center mx-auto">Headphones</h1>
+      <div className="align-element flex-col static align-element flex lg:justify-start justify-center items-center  ">
         {products &&
           products.map((item) => {
             return (

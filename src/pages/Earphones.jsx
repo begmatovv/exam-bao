@@ -20,7 +20,10 @@ const Earphones = () => {
   }, []);
 
   return (
-    <div className="align-element">
+    <div className="">
+      <h1 className="text-white bg-black/90 py-24 text-4xl uppercase flex justify-center mx-auto">
+        EARPHONES
+      </h1>
       <div className="flex-col static align-element flex lg:justify-start justify-center items-center  ">
         {products &&
           products.map((item) => {
@@ -45,7 +48,7 @@ const Earphones = () => {
                     <p className="text-base text-gray-300 mb-4">
                       {item.description}
                     </p>
-                    <BtnRev id={item.id}/>
+                    <BtnRev id={item.id} />
                   </div>
                 </div>
               </div>

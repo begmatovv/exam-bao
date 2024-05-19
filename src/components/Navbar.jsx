@@ -23,7 +23,6 @@ const Navbar = () => {
             >
               <Navlinks />
             </ul>
-           
           </div>
           <div className="">
             <span>AUDIOPHILE</span>
@@ -32,9 +31,54 @@ const Navbar = () => {
             <Navlinks />
           </div>
 
-          <Link to="./checkout">
-            <AiOutlineShoppingCart className="w-6 h-6" />
-          </Link>
+          <div className="dropdown dropdown-end  text-black">
+            {" "}
+            <AiOutlineShoppingCart
+              className="w-6 h-6 text-white "
+              tabIndex={0}
+              role="button"
+            />
+            <div
+              tabIndex={0}
+              className="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-80"
+            >
+              <div className="flex flex-col p-5">
+                <div className="flex justify-between items-center mb-8">
+                  <span className="text-2xl">Cart()</span>
+                  <span className="underline">Remove all</span>
+                </div>
+                <div className="cart flex justify-between">
+                  <img src="" alt="" />
+                  <div className="">
+                    <h3>name</h3>
+                    <span>price</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-base-300">
+                    <button
+                      className=" text-[14px] text-black hover:text-cream font-bold tracking-[1px] cursor-pointer"
+
+                      // disabled={cartNum === 0 || (cartNum < 0 && true)}
+                    >
+                      -
+                    </button>
+                    <div className=" text-[14px] text-black font-bold tracking-[1px]">
+                      {/* {cartNum} */}0
+                    </div>
+                    <button
+                      className=" text-[14px] text-black hover:text-cream font-bold tracking-[1px] cursor-pointer"
+                      // onClick={plusClick}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <button className="btn bg-orange-400 text-white">
+                  {" "}
+                  <Link to="/checkout">Checkout</Link>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
