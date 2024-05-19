@@ -45,7 +45,7 @@ const Earphones = () => {
                     <p className="text-base text-gray-300 mb-4">
                       {item.description}
                     </p>
-                    <BtnRev />
+                    <BtnRev id={item.id}/>
                   </div>
                 </div>
               </div>

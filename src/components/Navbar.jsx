@@ -19,10 +19,11 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-200 text-black rounded-box w-52"
+              className="dropdown-content z-[1] text-black  menu menu-vertical p-2 shadow bg-base-100 rounded-box w-52"
             >
               <Navlinks />
             </ul>
+           
           </div>
           <div className="">
             <span>AUDIOPHILE</span>

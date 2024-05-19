@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CartList, PreFooter } from "../components";
 import BtnRev from "../components/BtnRev";
 import hero from "../assets/product-zx9-speaker/desktop/image-product.jpg";
-
+import { Link } from "react-router-dom";
 const Speakers = () => {
   const [products, setProducts] = useState(null);
   console.log(products);
@@ -22,6 +22,7 @@ const Speakers = () => {
 
   return (
     <div className="align-element">
+      
       <div className="flex-col static align-element flex lg:justify-start justify-center items-center  ">
         {products &&
           products.map((item) => {
@@ -46,7 +47,7 @@ const Speakers = () => {
                     <p className="text-base text-gray-300 mb-4">
                       {item.description}
                     </p>
-                    <BtnRev />
+                    <BtnRev id={item.id} />
                   </div>
                 </div>
               </div>

@@ -11,7 +11,7 @@ const CartList = () => {
         <img className="relative bottom-16 mx-auto" src={img1} alt="" />
         <div className="relative bottom-6">
           <h3 className="text-2xl mb-4">Headphones</h3>
-          <Link to="./" className="text-sm">
+          <Link to="./headphones" className="text-sm">
             SHOP <span className="font-bold  text-orange-300"> Now!</span>
           </Link>
         </div>
@@ -21,7 +21,7 @@ const CartList = () => {
         <img className="relative bottom-16 mx-auto mb-4" src={img2} alt="" />
         <div className="relative bottom-6">
           <h3 className="text-2xl mb-4">Speakers</h3>
-          <Link className="text-sm">
+          <Link to="./speakers" className="text-sm">
             SHOP <span className="font-bold  text-orange-300"> Now!</span>
           </Link>
         </div>
@@ -31,7 +31,7 @@ const CartList = () => {
         <img className="relative bottom-16 mx-auto mb-8" src={img3} alt="" />
         <div className="relative bottom-6">
           <h3 className="text-2xl mb-4">Earphones</h3>
-          <Link className="text-sm">
+          <Link to="./earphones" className="text-sm">
             SHOP <span className="font-bold  text-orange-300"> Now!</span>
           </Link>
         </div>

@@ -34,7 +34,9 @@ const CartsLanding = () => {
             Upgrade to premium speakers that are phenomenally built to deliver
             truly remarkable sound.
           </p>
-          <BtnRev />
+          <button className="btn bg-black rounded-none px-5 text-white border-none">
+            See Product
+          </button>
         </div>
       </div>
       <div
@@ -46,7 +48,9 @@ const CartsLanding = () => {
       >
         <div className="pl-32">
           <h3 className="text-2xl mb-9">ZX7 SPEAKER</h3>
-          <BtnRev />
+          <button className="btn  rounded-none px-5 text-black bg-inherit border-2 border-slate-950">
+            See Product
+          </button>
         </div>
       </div>
 
@@ -58,7 +62,9 @@ const CartsLanding = () => {
         />
         <div className="bg-base-300  lg:w-[540px] h-80 md:w-[339px] sm:w-full flex flex-col items-start justify-center pl-20">
           <h3 className="text-2xl mb-9">YX1 EARPHONES</h3>
-          <BtnRev />
+          <button className="btn  rounded-none px-5 text-black bg-inherit border-2 border-slate-950">
+            See Product
+          </button>
         </div>
       </div>
     </div>

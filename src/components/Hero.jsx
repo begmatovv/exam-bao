@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import hero from "../assets/home/desktop/image-hero.jpg";
 import BtnRev from "./BtnRev";
 const Hero = () => {
+  
   return (
     <div
       className="bg-right-bottom"
@@ -16,7 +18,7 @@ const Hero = () => {
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
-          <BtnRev />
+          <BtnRev/>
         </div>
       </div>
     </div>
