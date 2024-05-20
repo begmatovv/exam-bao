@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { CartList, CartsLanding, Hero, PreFooter } from "../components";
+import { customFetch } from "../utils";
+import { useLoaderData } from "react-router-dom";
+const url = "?id";
+
+export const loader = async () => {
+  const response = await customFetch(url);
+  const products = response.data;
+  return { products };
+};
 const Landing = () => {
-  const [products, setProducts] = useState(null);
-  console.log(products);
-  useEffect(() => {
-    fetch("http://localhost:3000/products")
-      .then((data) => {
-        return data.json();
-      })
-      .then((products) => {
-        setProducts(products);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { products } = useLoaderData();
+
   return (
     <div>
       <Hero />

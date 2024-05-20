@@ -17,6 +17,13 @@ import {
 } from "./pages";
 import { action as RegisterAction } from "./pages/Register";
 import { action as LoginAction } from "./pages/Login";
+
+import { loader as SpeakersLoader } from "./pages/Speakers";
+import { loader as HeadphonesLoader } from "./pages/Headphones";
+import { loader as EarphonesLoader } from "./pages/Earphones";
+import { loader as FeaturedLoader } from "./pages/Landing";
+import { loader as SingleLoader } from "./pages/SingleProduct";
+
 import { ProtectedRotes } from "./components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -39,26 +46,28 @@ function App() {
         {
           index: true,
           element: <Landing />,
-          // loader: FeaturedLoader,
+          loader: FeaturedLoader,
         },
         {
           path: "/headphones",
           element: <Headphones />,
-          // loader: ProductsLoader,
+          loader: HeadphonesLoader,
         },
         {
           path: "/speakers",
           element: <Speakers />,
+          loader: SpeakersLoader,
         },
 
         {
           path: "/earphones",
           element: <Earphones />,
+          loader: EarphonesLoader,
         },
         {
           path: "/products/:id",
           element: <SingleProduct />,
-          // loader: SingleLoader,
+          loader: SingleLoader,
         },
         {
           path: "/checkout",
@@ -86,7 +95,7 @@ function App() {
       dispatch(authReady());
     });
   }, []);
-  return <>{authReady && <RouterProvider router={routes} />}</>;
+  return <>{authReadyState && <RouterProvider router={routes} />}</>;
 }
 
 export default App;

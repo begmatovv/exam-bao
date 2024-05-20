@@ -1,150 +1,189 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { CartList } from "../components";
-import { useDispatch } from "react-redux";
-import { addItem } from "../features/cart/cartSlice";
-import toast from "react-hot-toast";
-const SingleProduct = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [cartNum, setCartNum] = useState(1);
+import { useLoaderData } from "react-router-dom";
+import { customFetch, formatPrice } from "../utils";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  incrementCart,
+  decrementCart,
+  addItem,
+} from "../features/cart/cartSlice";
+
+export const loader = async ({ params }) => {
+  const response = await customFetch(`/?id=${params.id}`);
+  const products = response.data;
+  return { products };
+};
+
+function SingleProduct() {
+  const { products } = useLoaderData();
+  const data = products[0];
+
+  const { value } = useSelector((store) => store.cartState);
   const dispatch = useDispatch();
 
-  const minusClick = () => {
-    setCartNum(cartNum - 1);
+  const {
+    id,
+    name,
+    image,
+    description,
+    price,
+    features,
+    includes,
+    gallery,
+    others,
+  } = data;
+  const { desktop } = image;
+  const CartProducts = {
+    cartID: id + name,
+    productsID: id,
+    image,
+    price,
+    name,
+    amount: value,
   };
-
-  const plusClick = () => {
-    setCartNum(cartNum + 1);
+  const AddToCart = () => {
+    dispatch(
+      addItem({
+        products: CartProducts,
+      })
+    );
   };
-  const addToCartHandler = () => {
-    const cartProduct = {
-      id: product.id,
-      price: product.price,
-      quantity: cartNum,
-      totalPrice: product.price,
-      name: product.name,
-      image: product.image,
-    };
-    dispatch(addItem(cartProduct));
-    toast.success("item added to cart");
-  };
-  useEffect(() => {
-    fetch(`http://localhost:3000/products/${id}`)
-      .then((data) => data.json())
-      .then((productData) => setProduct(productData))
-      .catch((err) => console.log(err));
-  }, [id]);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
 
   return (
-    <div className="align-element ">
-      <div className="py-4">
-        <Link className="" to="/">
-          Go Back
-        </Link>
-      </div>
-      <div
-        key={product.id}
-        className="flex justify-between  gap-32 items-center"
-      >
-        <img
-          src={`${product.image.desktop}`}
-          alt=""
-          className="lg:w-[540px]  lg:[h-560px] sm:h-[327px] md:h-[480px] md:w-[281px] sm:w-[327px]"
-        />
-        <div className="align-element text-black flex flex-col justify-center items-center  ">
-          <div className="lg:w-[445px] md:w-[340px] sm:w-[327px]  text-start flex flex-col md:items-center sm:items-center gap-6 lg:items-start text-white py-36">
-            <p className="text-base text-gray-300 opacity-30 ">
-              {product.new === true ? "NEW PRODUCT" : ""}
-            </p>
-            <h1 className="uppercase text-black text-5xl">{product.name}</h1>
-            <p className="text-base text-gray-300">{product.description}</p>
-            <p className="text-black text-xl">{product.price}$</p>
-            <div className="flex gap-4">
-              <div className="w-[120px] flex justify-between bg-gray-light p-[15px] items-center">
-                <div
-                  className="text-[14px] text-black/30 hover:text-cream font-bold tracking-[1px] cursor-pointer"
-                  onClick={minusClick}
-                  disabled={cartNum === 0 || (cartNum < 0 && true)}
+    <>
+      {products && (
+        <div className="align-element">
+          <p className="mt-10">Go Back</p>
+
+          <div key={id}>
+            <div className=" mt-10 flex mb-40 ">
+              <img src={desktop} alt="" className="w-[540px]" />
+              <div className="p-20 flex flex-col gap-5">
+                <p className=" text-orange-400">NEW PRODUCT</p>
+                <h2 className="font-bold text-[40px] leading-[44px] tracking-[1.5px]">
+                  {name}
+                </h2>
+                <p className="mb-10 font-normal text-[15px] leading-[25px] ">
+                  {description}
+                </p>
+                <p
+                  className="font-bold text-[18px] leading-[24px] 
+         tracking-[1.3px]"
                 >
-                  -
-                </div>
-                <div className="text-[14px] text-black font-bold tracking-[1px]">
-                  {cartNum}
-                </div>
-                <div
-                  className="text-[14px] text-black hover:text-cream font-bold tracking-[1px] cursor-pointer"
-                  onClick={plusClick}
-                >
-                  +
+                  {price}$
+                </p>
+                <div className="flex gap-5 items-center">
+                  <div className="bg-slate-200 px-3 py-3 flex justify-between items-center w-40 rounded-lg">
+                    <button
+                      className="text-3xl text-orange-400"
+                      onClick={() => {
+                        if (value >= 1) {
+                          dispatch(decrementCart());
+                        }
+                      }}
+                    >
+                      -
+                    </button>
+                    <span className="text-lg font-bold">{value}</span>
+
+                    <button
+                      className="text-3xl text-orange-400"
+                      onClick={() => dispatch(incrementCart())}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (value > 0) {
+                        AddToCart();
+                      }
+                    }}
+                    className="capitalize btn btn-primary"
+                  >
+                    add to Cart
+                  </button>
                 </div>
               </div>
-              <button
-                className="bg-orange-500 py-[15px] w-full hover:bg-cream-light text-white uppercase transition-all duration-150"
-                onClick={addToCartHandler}
-              >
-                Add to cart
-              </button>
+            </div>
+            <div className=" lg:flex lg:gap-[125px] justify-between lg:max-w-[1110px] mb-40">
+              <div className="w-[635px]">
+                <h3 className="uppercase text-h5 md:text-h3 mb-6">Features</h3>
+                <p className="text-base opacity-50">{features}</p>
+              </div>
+              <div className="mb-[88px] w-[350px]">
+                <h3 className="uppercase text-h5 md:text-h3 mb-6">Includes:</h3>
+                <ul className="flex flex-col gap-2">
+                  {includes.map((item, index) => (
+                    <li key={index} className="flex items-center gap-6">
+                      <span className="text-orange-400">{item.quantity}X</span>
+                      <span className="text-body opacity-50">{item.item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="container mx-auto flex flex-col gap-5 md:grid-rows-1 mb-[120px] md:max-w-[689px] lg:max-w-[1110px] md:grid md:grid-cols-[1fr,1.45fr] md:gap-5">
+            <div className="flex flex-col justify-between gap-5">
+              <div>
+                <img
+                  className="rounded-lg md:hidden"
+                  src={`${gallery.first.mobile}`}
+                  alt=""
+                />
+                <img
+                  className="rounded-lg hidden md:block lg:hidden"
+                  src={`${gallery.first.tablet}`}
+                  alt=""
+                />
+                <img
+                  className="rounded-lg hidden lg:block"
+                  src={`${gallery.first.desktop}`}
+                  alt=""
+                />
+              </div>
+              <div className="img2">
+                <img
+                  className="rounded-lg md:hidden"
+                  src={`${gallery.second.mobile}`}
+                  alt=""
+                />
+                <img
+                  className="rounded-lg hidden md:block lg:hidden"
+                  src={`${gallery.second.tablet}`}
+                  alt=""
+                />
+                <img
+                  className="rounded-lg hidden lg:block"
+                  src={`${gallery.second.desktop}`}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div>
+              <img
+                className="rounded-lg md:hidden"
+                src={`${gallery.third.mobile}`}
+                alt=""
+              />
+              <img
+                className="rounded-lg hidden md:block lg:hidden"
+                src={`${gallery.third.tablet}`}
+                alt=""
+              />
+              <img
+                className="rounded-lg hidden lg:block"
+                src={`${gallery.third.desktop}`}
+                alt=""
+              />
             </div>
           </div>
+          </div>
+          
         </div>
-      </div>
-      {/* <img src={product.image.desktop} alt={product.name} />
-      <h1>{product.name}</h1>
-      <p>{product.description}</p> */}
-
-      <div className="flex justify-between mb-40">
-        <div className="w-[653px]">
-          <h2 className="text-3xl mb-8">Features:</h2>
-          <p>{product.features}</p>
-        </div>
-        <div>
-          <h2 className="text-3xl mb-8 uppercase">in the box</h2>
-          <ul className="flex flex-col gap-4">
-            {product.includes.map((item, index) => (
-              <li key={index}>
-                <span className="text-orange-400 mr-2">{item.quantity} X</span>{" "}
-                {item.item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 mb-40">
-        <div className="flex flex-col gap-5">
-          <img
-            className="w-[445px] h-[280px]"
-            src={product.gallery.first.desktop}
-            alt={`${product.name} gallery 1`}
-          />
-          <img
-            className="w-[445px] h-[280px]"
-            src={product.gallery.second.desktop}
-            alt={`${product.name} gallery 2`}
-          />
-        </div>
-        <img
-          className="w-[645px] h-[580px]"
-          src={product.gallery.third.desktop}
-          alt={`${product.name} gallery 3`}
-        />
-      </div>
-      <div className="mb-40 text-center">
-        <h2 className="text-3xl uppercase mb-14">You may also like</h2>
-        <div>
-          {product.others.map((item) => {
-            <img src={item.image.desktop} alt="" />;
-            <h3>{item.slug}</h3>;
-          })}
-        </div>
-      </div>
-      <CartList />
-    </div>
+      )}
+    </>
   );
-};
+}
 
 export default SingleProduct;
