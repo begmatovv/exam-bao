@@ -124,62 +124,61 @@ function SingleProduct() {
               </div>
             </div>
             <div className="container mx-auto flex flex-col gap-5 md:grid-rows-1 mb-[120px] md:max-w-[689px] lg:max-w-[1110px] md:grid md:grid-cols-[1fr,1.45fr] md:gap-5">
-            <div className="flex flex-col justify-between gap-5">
+              <div className="flex flex-col justify-between gap-5">
+                <div>
+                  <img
+                    className="rounded-lg md:hidden"
+                    src={`${gallery.first.mobile}`}
+                    alt=""
+                  />
+                  <img
+                    className="rounded-lg hidden md:block lg:hidden"
+                    src={`${gallery.first.tablet}`}
+                    alt=""
+                  />
+                  <img
+                    className="rounded-lg hidden lg:block"
+                    src={`${gallery.first.desktop}`}
+                    alt=""
+                  />
+                </div>
+                <div className="img2">
+                  <img
+                    className="rounded-lg md:hidden"
+                    src={`${gallery.second.mobile}`}
+                    alt=""
+                  />
+                  <img
+                    className="rounded-lg hidden md:block lg:hidden"
+                    src={`${gallery.second.tablet}`}
+                    alt=""
+                  />
+                  <img
+                    className="rounded-lg hidden lg:block"
+                    src={`${gallery.second.desktop}`}
+                    alt=""
+                  />
+                </div>
+              </div>
               <div>
                 <img
                   className="rounded-lg md:hidden"
-                  src={`${gallery.first.mobile}`}
+                  src={`${gallery.third.mobile}`}
                   alt=""
                 />
                 <img
                   className="rounded-lg hidden md:block lg:hidden"
-                  src={`${gallery.first.tablet}`}
+                  src={`${gallery.third.tablet}`}
                   alt=""
                 />
                 <img
                   className="rounded-lg hidden lg:block"
-                  src={`${gallery.first.desktop}`}
-                  alt=""
-                />
-              </div>
-              <div className="img2">
-                <img
-                  className="rounded-lg md:hidden"
-                  src={`${gallery.second.mobile}`}
-                  alt=""
-                />
-                <img
-                  className="rounded-lg hidden md:block lg:hidden"
-                  src={`${gallery.second.tablet}`}
-                  alt=""
-                />
-                <img
-                  className="rounded-lg hidden lg:block"
-                  src={`${gallery.second.desktop}`}
+                  src={`${gallery.third.desktop}`}
                   alt=""
                 />
               </div>
             </div>
-            <div>
-              <img
-                className="rounded-lg md:hidden"
-                src={`${gallery.third.mobile}`}
-                alt=""
-              />
-              <img
-                className="rounded-lg hidden md:block lg:hidden"
-                src={`${gallery.third.tablet}`}
-                alt=""
-              />
-              <img
-                className="rounded-lg hidden lg:block"
-                src={`${gallery.third.desktop}`}
-                alt=""
-              />
-            </div>
           </div>
-          </div>
-          
         </div>
       )}
     </>
