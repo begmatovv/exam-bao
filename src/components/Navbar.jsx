@@ -3,6 +3,7 @@ import { BsList } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import hero from "../assets/home/desktop/image-hero.jpg";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const { numItemsInCart } = useSelector((state) => state.cartState);
   return (
@@ -42,6 +43,12 @@ const Navbar = () => {
                 <span className="badge badge-sm indicator-item bg-orange-400 border-none text-black">
                   {numItemsInCart}
                 </span>
+              </div>
+              <div
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-300 text-black rounded-box w-52"
+              >
+                <Link to="/checkout">Checkoyt</Link>
               </div>
             </div>
           </div>
