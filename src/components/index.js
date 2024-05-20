@@ -10,3 +10,4 @@ export { default as Cart } from "./Cart";
 export { default as FormInput } from "./FormInput";
 export { default as SubmitBtn } from "./SubmitBtn";
 export { default as ProtectedRotes } from "./ProtectedRotes";
+export { default as CartsDrop } from "./CartsDrop";
